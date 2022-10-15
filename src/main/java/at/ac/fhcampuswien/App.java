@@ -89,7 +89,8 @@ public class App {
 
     public static int randomNumberBetweenOneAndHundred(){
         Random rnd = new Random();
-        return rnd.nextInt(100);
+        // Man muss "1" addieren, sonst sind die Zahlen von 0 bis 99
+        return (rnd.nextInt(100) + 1);
     }
 
     public static boolean swapArrays(int[] arrayOne, int[] arrayTwo){
@@ -100,6 +101,51 @@ public class App {
             arrayTwo[i] = temp;
         }
         return true;
+    }
+    public static String camelCase(String originalText){
+        char[] originalTextArray = originalText.toCharArray();
+        StringBuilder camelCaseText = new StringBuilder();
+
+        final char SPACE = 32;
+        final char UPPERCASE_A = 65;
+        final char UPPERCASE_Z = 90;
+        final char LOWERCASE_A = 97;
+        final char LOWERCASE_Z = 122;
+
+        final boolean SWITCH_TO_LOWER_CASE = false;
+        final boolean SWITCH_TO_UPPER_CASE = true;
+
+        boolean nextLetterStartsWord = true;
+
+        for (char c : originalTextArray) {
+            // Leerzeichen führen dazu, dass der nächste Buchstabe groß geschrieben wird.
+            if (c == SPACE) nextLetterStartsWord = true;
+
+            else if (c >= UPPERCASE_A && c <= UPPERCASE_Z) {
+                // Bei Großbuchstaben wird kontrolliert, ob gerade ein Wort beginnt. Je nachdem wird es groß oder klein geschrieben.
+                if (nextLetterStartsWord) {
+                    camelCaseText.append(c);
+                    nextLetterStartsWord = false;
+                } else camelCaseText.append(switchCaseOfLetter(c, SWITCH_TO_LOWER_CASE));
+
+            } else if (c >= LOWERCASE_A && c <= LOWERCASE_Z) {
+                // Bei Kleinbuchstaben wird kontrolliert, ob gerade ein Wort beginnt. Je nachdem wird es groß oder klein geschrieben.
+                if (nextLetterStartsWord) {
+                    camelCaseText.append(switchCaseOfLetter(c, SWITCH_TO_UPPER_CASE));
+                    nextLetterStartsWord = false;
+                } else camelCaseText.append(c);
+            }
+        }
+        return camelCaseText.toString();
+    }
+
+    private static char switchCaseOfLetter(char letterToSwitch, boolean switchToUpperCase){
+        final int NUMERICAL_SEPARATOR_OF_LOWER_AND_UPPER_CASE_LETTERS_IN_ASCII = 32;
+
+        if (switchToUpperCase)
+            return (char)(letterToSwitch - NUMERICAL_SEPARATOR_OF_LOWER_AND_UPPER_CASE_LETTERS_IN_ASCII);
+        else
+            return (char)(letterToSwitch + NUMERICAL_SEPARATOR_OF_LOWER_AND_UPPER_CASE_LETTERS_IN_ASCII);
     }
 
     public static void main(String[] args) {
@@ -116,6 +162,7 @@ public class App {
         // Task 3
             // App.guessingGame(randomNumberBetweenOneAndHundred());
 
+        // Task 5
 
     }
 }
