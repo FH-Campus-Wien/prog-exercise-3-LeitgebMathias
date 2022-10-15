@@ -1,5 +1,8 @@
 package at.ac.fhcampuswien;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class App {
 
     // Implement all methods as public static
@@ -62,20 +65,56 @@ public class App {
         return pseudoRandomNumbers;
     }
 
+    public static void guessingGame(int numberToGuess){
+        Scanner scanner = new Scanner(System.in);
 
+        int numberOfGuesses = 1;
+        do {
+            System.out.print("Guess number " + numberOfGuesses + ": ");
+            int currentGuess = scanner.nextInt();
 
+            if (currentGuess == numberToGuess){
+                System.out.println("You won wisenheimer!");
+                return;
+            }
+            if (currentGuess < numberToGuess)  System.out.println("The number AI picked is higher than your guess.");
+            else if(numberOfGuesses != 10){
+                System.out.println("The number AI picked is lower than your guess.");
+            }
+
+            numberOfGuesses ++;
+        } while (numberOfGuesses <= 10);
+        System.out.println("You lost! Have you ever heard of divide & conquer?");
+    }
+
+    public static int randomNumberBetweenOneAndHundred(){
+        Random rnd = new Random();
+        return rnd.nextInt(100);
+    }
+
+    public static boolean swapArrays(int[] arrayOne, int[] arrayTwo){
+        if (arrayOne.length != arrayTwo.length) return false;
+        for (int i = 0 ; i < arrayOne.length ; i++){
+            int temp = arrayOne[i];
+            arrayOne[i] = arrayTwo[i];
+            arrayTwo[i] = temp;
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
 
-        // Task 1
-        // App.oneMonthCalendar(31,6);
+        // Task 1 - Test
+            // App.oneMonthCalendar(31,6);
 
-        /* Task 2
-            long[] test = App.lcg(0);
-            for (int i=0;i < test.length ; i++ ){
-                System.out.println(test[i]);
-            }
-        */
+        // Task 2 - Test
+            // long[] test = App.lcg(0);
+            // for (int i=0;i < test.length ; i++ ){
+            //     System.out.println(test[i]);
+            // }
+
+        // Task 3
+            // App.guessingGame(randomNumberBetweenOneAndHundred());
 
 
     }
