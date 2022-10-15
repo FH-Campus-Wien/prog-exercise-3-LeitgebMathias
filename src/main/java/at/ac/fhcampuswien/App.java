@@ -148,6 +148,19 @@ public class App {
             return (char)(letterToSwitch + NUMERICAL_SEPARATOR_OF_LOWER_AND_UPPER_CASE_LETTERS_IN_ASCII);
     }
 
+    public static int checkDigit(int[] digits){
+        int sum = 0;
+        if (digits.length >= 10) return -1;
+        for (int i = 0 ; i<digits.length; i++){
+            sum += digits[i] * (i + 2);
+        }
+        int result = 11 - (sum % 11);
+        if(result == 10) return 0;
+        if(result == 11) return 5;
+        return result;
+    }
+
+
     public static void main(String[] args) {
 
         // Task 1 - Test
@@ -162,7 +175,6 @@ public class App {
         // Task 3
             // App.guessingGame(randomNumberBetweenOneAndHundred());
 
-        // Task 5
 
     }
 }
